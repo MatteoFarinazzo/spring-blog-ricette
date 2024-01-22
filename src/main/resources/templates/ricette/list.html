@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/resources :: head('Ricette')"></head>
+
+<body>
+<nav th:replace="fragments/navbar.html :: navbar('ricette')"></nav>
+<main class="container">
+    <h1>prova</h1>
+    <div class="card" style="width: 18rem;" th:each="ricetta : ${ricetteList}">
+        <img th:src="@{${pizza.foto}}">
+        <div class="card-body">
+            <div class="row">
+                <h4 class="card-title col-9 pt-4" th:text="${ricetta.title}"></h4>
+                <h5 class="col-3 pt-3" th:text="|${ricetta.preparationTime} min.|"></h5>
+                <p th:text="|per ${ricetta.numberOfPortions} persone|"></p>
+            </div>
+        </div>
+
+        <div class="card-body d-flex justify-content-between">
+            <a class="btn btn-primary col-5" th:href="@{/ricetta/edit}">Modifica</a>
+            <a class="btn btn-primary col-5" th:href="@{/ricetta/delete}">Elimina</a>
+        </div>
+    </div>
+
+</main>
+
+<th:block th:replace="fragments/resources :: script"></th:block>
+</body>
+</html>

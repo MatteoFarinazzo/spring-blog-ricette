@@ -22,6 +22,8 @@ public class Ricetta {
     private Integer preparationTime;
 
     private Integer numberOfPortions;
+    @Lob
+    @Column(length = 500)
     private String recipeText;
 
     @ManyToMany
