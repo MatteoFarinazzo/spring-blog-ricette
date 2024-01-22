@@ -7,12 +7,12 @@
 <div class="container">
     <div class="row mt-3">
         <div class="col-8 mt-4">
-            <img class="img-fluid" th:src="@{${ricetta.image}}">
+            <img class="img-fluid shadow-lg" th:src="@{${ricetta.image}}">
         </div>
 
         <div class="col-4  mt-3 pt-5 centro">
             <div>
-                <p class="  mt-5" th:text="${ricetta.category}"></p>
+                <p class="  mt-5" th:text="${ricetta.category.name}"></p>
                 <h1 class="  pb-3 mt-1"
                     th:text="|${ricetta.title}  (per ${ricetta.numberOfPortions} persone)|"></h1>
                 <p class=" text-center mt-3" th:text="|${ricetta.preparationTime} min.|"></p>
