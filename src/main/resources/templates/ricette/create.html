@@ -5,11 +5,12 @@
 <body>
 <nav th:replace="fragments/navbar.html :: navbar('ricette')"></nav>
 <main class="container">
-    <h1>Crea la tua ricetta</h1>
+    <h1 th:text="${ricetta.id == null ? 'Crea la tua ricetta' : 'Modifica Ricetta'}"></h1>
     <form
             method="post"
+            th:with="url=${ricetta.id == null ? '/ricette/create' : '/ricette/edit/' + ricetta.id}"
+            th:action="@{${url}}"
             th:object="${ricetta}"
-            th:action="@{/ricette/create}"
             class="row "
     >
         <div class="col-6">

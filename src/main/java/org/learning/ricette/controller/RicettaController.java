@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -53,6 +54,47 @@ public class RicettaController {
         }
         Ricetta savedRicetta = ricettaRepository.save(formRicetta);
         return "redirect:/ricette/show/" + savedRicetta.getId();
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        Optional<Ricetta> result = ricettaRepository.findById(id);
+        if (result.isPresent()) {
+            model.addAttribute("ricetta", result.get());
+            return "ricette/create";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ricetta with id" + id + "not found");
+        }
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute("ricetta") Ricetta formRicetta, BindingResult bindingResult) {
+
+        Optional<Ricetta> result = ricettaRepository.findById(id);
+        if (result.isPresent()) {
+            Ricetta ricettaToEdit = result.get();
+            if (bindingResult.hasErrors()) {
+                return "ricette/create";
+            }
+
+            formRicetta.setImage(ricettaToEdit.getImage());
+            Ricetta savedRicetta = ricettaRepository.save(formRicetta);
+            return "redirect:/ricette/show/" + id;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ricetta with id" + id + "not found");
+        }
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        Optional<Ricetta> result = ricettaRepository.findById(id);
+        if (result.isPresent()) {
+            ricettaRepository.deleteById(id);
+            redirectAttributes.addFlashAttribute("redirectMessage", "La ricetta " + result.get().getTitle() + " è stata eliminata");
+            return "redirect:/ricette";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ricetta with id" + id + "not found");
+        }
     }
 
 }

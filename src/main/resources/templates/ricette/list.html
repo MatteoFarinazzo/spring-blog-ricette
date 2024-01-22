@@ -9,7 +9,9 @@
     <div class="row">
         <div class="d-flex">
             <div class="card" style="width: 18rem;" th:each="ricetta : ${ricetteList}">
-                <img th:src="@{${ricetta.image}}">
+                <a th:href="@{/ricette/show/{id}(id=${ricetta.id})}">
+                    <img th:src="@{${ricetta.image}}" class="w-75">
+                </a>
                 <div class="card-body">
                     <div class="row">
                         <h2 class="card-title col-9 pt-3" th:text="${ricetta.title}"></h2>
@@ -19,10 +21,14 @@
                 </div>
 
                 <div class="card-body d-flex justify-content-between">
-                    <a class="btn btn-primary col-5" th:href="@{/ricetta/edit}">Modifica</a>
-                    <a class="btn btn-primary col-5" th:href="@{/ricetta/delete}">Elimina</a>
+                    <a class="btn btn-primary col-5" th:href="@{/ricette/edit/{id}(id=${ricetta.id})}">Modifica</a>
+                    <form th:action="@{/ricette/delete/{id}(id=${ricetta.id})}" method="post"
+                          onsubmit="return confirm('Sei sicuro di voler eliminare questa ricetta?')">
+                        <button type="submit" class="btn btn-primary">Cancella</button>
+                    </form>
                 </div>
             </div>
+
         </div>
     </div>
 
