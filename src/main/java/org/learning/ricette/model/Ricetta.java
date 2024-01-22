@@ -16,7 +16,7 @@ public class Ricetta {
     private String title;
     @NotEmpty
     private String ingredients;
-    @NotEmpty
+
     private String image;
     @NotNull
     private Integer preparationTime;
