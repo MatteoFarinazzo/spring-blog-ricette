@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="d-flex">
-            <div class="card m-2" style="width: 20rem;" th:each="ricetta : ${ricetteList}">
+            <div class="card m-2 shadow card" style="width: 20rem;" th:each="ricetta : ${ricetteList}">
                 <a th:href="@{/ricette/show/{id}(id=${ricetta.id})}">
                     <img th:src="@{${ricetta.image}}" class="card-img-top" alt="image recipe">
                 </a>
@@ -29,11 +29,11 @@
                     <div class="row">
                         <h2 class="card-title col-9 pt-3" th:text="${ricetta.title}"></h2>
                         <h5 class="col-3 pt-3" th:text="|${ricetta.preparationTime} min.|"></h5>
-                        <p th:text="|per ${ricetta.numberOfPortions} persone|"></p>
+                        <p th:text="|Per ${ricetta.numberOfPortions} persone|"></p>
                     </div>
                 </div>
 
-                <div class="card-body d-flex justify-content-between">
+                <div class="card-body d-flex justify-content-between ">
                     <div class="col-5">
                         <a class="btn btn-dark " th:href="@{/ricette/edit/{id}(id=${ricetta.id})}">Modifica</a>
                     </div>
