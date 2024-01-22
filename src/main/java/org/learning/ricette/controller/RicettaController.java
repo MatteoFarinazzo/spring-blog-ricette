@@ -2,6 +2,7 @@ package org.learning.ricette.controller;
 
 import jakarta.validation.Valid;
 import org.learning.ricette.model.Ricetta;
+import org.learning.ricette.repositories.CategoriaRepository;
 import org.learning.ricette.repositories.RicettaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,19 @@ import java.util.Optional;
 public class RicettaController {
     @Autowired
     private RicettaRepository ricettaRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @GetMapping
-    public String index(Model model) {
-        List<Ricetta> ricetteList = ricettaRepository.findAll();
+    public String index(@RequestParam(name = "keyword", required = false) String searchKeyword, Model model) {
+        List<Ricetta> ricetteList;
+        if (searchKeyword != null) {
+            ricetteList = ricettaRepository.findByTitleContaining(searchKeyword);
+        } else {
+            ricetteList = ricettaRepository.findAll();
+        }
         model.addAttribute("ricetteList", ricetteList);
+        model.addAttribute("preloadSearch", searchKeyword);
         return "ricette/list";
     }
 
@@ -44,6 +53,7 @@ public class RicettaController {
     public String create(Model model) {
         Ricetta ricetta = new Ricetta();
         model.addAttribute("ricetta", ricetta);
+        model.addAttribute("category", categoriaRepository.findAll());
         return "ricette/create";
     }
 
@@ -61,6 +71,7 @@ public class RicettaController {
         Optional<Ricetta> result = ricettaRepository.findById(id);
         if (result.isPresent()) {
             model.addAttribute("ricetta", result.get());
+            model.addAttribute("category", categoriaRepository.findAll());
             return "ricette/create";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ricetta with id" + id + "not found");
@@ -96,5 +107,6 @@ public class RicettaController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ricetta with id" + id + "not found");
         }
     }
+
 
 }

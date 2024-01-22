@@ -26,8 +26,8 @@ public class Ricetta {
     @Column(length = 500)
     private String recipeText;
 
-    @ManyToMany
-    private List<Categoria> categories;
+    @ManyToOne
+    private Categoria category;
 
     public Integer getId() {
         return id;
@@ -85,11 +85,11 @@ public class Ricetta {
         this.recipeText = recipeText;
     }
 
-    public List<Categoria> getCategories() {
-        return categories;
+    public Categoria getCategory() {
+        return category;
     }
 
-    public void setCategories(List<Categoria> categories) {
-        this.categories = categories;
+    public void setCategory(Categoria category) {
+        this.category = category;
     }
 }

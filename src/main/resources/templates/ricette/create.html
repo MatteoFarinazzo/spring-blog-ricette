@@ -69,6 +69,15 @@
             </div>
         </div>
 
+        <div class="col-4">
+            <label class="form-label" for="category">Categoria</label>
+            <select id="category" class="form-select" th:field="*{category}">
+                <option value="" selected>Seleziona una categoria</option>
+                <option th:each="cate : ${category}" th:value="${cate.id}"
+                        th:text="${cate.name}"></option>
+            </select>
+        </div>
+
 
         <div class="col-12 mt-4 mb-4">
             <button type="submit" class="btn btn-primary me-2">Save</button>
