@@ -12,7 +12,7 @@
 
         <div class="col-4  mt-3 pt-5 centro">
             <div>
-                <p class="  mt-5" th:text="${ricetta.category.name}"></p>
+                <p class="mt-5" th:if="${ricetta.category != null}" th:text="${ricetta.category.name}"></p>
                 <h1 class="  pb-3 mt-1"
                     th:text="|${ricetta.title}  (per ${ricetta.numberOfPortions} persone)|"></h1>
                 <p class=" text-center mt-3" th:text="|${ricetta.preparationTime} min.|"></p>
