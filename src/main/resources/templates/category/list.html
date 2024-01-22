@@ -11,7 +11,7 @@
             <li th:each="cate : ${categoryList}">
                 <div class="row mb-2">
                     <div class="col-9 center">
-                        <b th:text="${cate.name}"></b><span class=""></span>
+                        <b th:text="${cate.name}"></b>
                     </div>
                     <div class="col-3 text-center">
                         <div class="ms-auto">
@@ -35,6 +35,8 @@
     </div>
 </main>
 
+
+<footer th:replace="fragments/resources :: footer"></footer>
 
 <th:block th:replace="fragments/resources :: script"></th:block>
 </body>

@@ -12,7 +12,8 @@
 
         <div class="col-4  mt-3 pt-5 centro">
             <div>
-                <h1 class="  pb-3 mt-5"
+                <p class="  mt-5" th:text="${ricetta.category}"></p>
+                <h1 class="  pb-3 mt-1"
                     th:text="|${ricetta.title}  (per ${ricetta.numberOfPortions} persone)|"></h1>
                 <p class=" text-center mt-3" th:text="|${ricetta.preparationTime} min.|"></p>
             </div>
@@ -31,6 +32,8 @@
                 class="fa-solid fa-circle-chevron-left"></i> Ritorna alla lista </a>
     </div>
 </div>
+
+<footer th:replace="fragments/resources :: footer"></footer>
 
 <th:block th:replace="fragments/resources :: script"></th:block>
 </body>
