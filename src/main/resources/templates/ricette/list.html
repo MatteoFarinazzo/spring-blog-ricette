@@ -12,7 +12,7 @@
             <div class="input-group">
                 <input class="form-control" type="text" name="keyword" id="keyword"
                        placeholder="cerca una ricetta per nome" th:value="${preloadSearch}">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>
+                <button type="submit" class="btn btn-dark"><i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
         </form>
@@ -35,11 +35,11 @@
 
                 <div class="card-body d-flex justify-content-between">
                     <div class="col-5">
-                        <a class="btn btn-primary " th:href="@{/ricette/edit/{id}(id=${ricetta.id})}">Modifica</a>
+                        <a class="btn btn-dark " th:href="@{/ricette/edit/{id}(id=${ricetta.id})}">Modifica</a>
                     </div>
                     <form th:action="@{/ricette/delete/{id}(id=${ricetta.id})}" method="post"
                           onsubmit="return confirm('Sei sicuro di voler eliminare questa ricetta?')">
-                        <button type="submit" class="btn btn-primary">Cancella</button>
+                        <button type="submit" class="btn btn-dark">Cancella</button>
                     </form>
                 </div>
             </div>
@@ -48,7 +48,7 @@
     </div>
 
     <div class="mt-3 d-flex justify-content-center">
-        <a class="btn btn-primary" th:href="@{/ricette/create}">Aggiungi la tua
+        <a class="btn btn-dark" th:href="@{/ricette/create}">Aggiungi la tua
             ricetta</a>
     </div>
 
